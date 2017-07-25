@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224269259324249494}
   - component: {fileID: 222812471774823082}
+  - component: {fileID: 114549219285148768}
   m_Layer: 0
   m_Name: MentorPurchaseCell
   m_TagString: Untagged
@@ -55,7 +56,7 @@ GameObject:
   - component: {fileID: 222224708655402784}
   - component: {fileID: 114433119786403328}
   m_Layer: 0
-  m_Name: NameLabel (1)
+  m_Name: RarityLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,6 +409,24 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u5E73\u7530\u30DE\u30CD\u30FC\u30B8\u30E3\u30FC"
+--- !u!114 &114549219285148768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040352740665486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ce93150d28f4f42bcfb0b84bf0a133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 114764346462213602}
+  nameLabel: {fileID: 114538249631158538}
+  rarityLabel: {fileID: 114433119786403328}
+  flavorTextLabel: {fileID: 114753727962433348}
+  productivityLabel: {fileID: 114722733355398268}
+  costLabel: {fileID: 114243496890385742}
+  purchaseButton: {fileID: 114193535114442008}
 --- !u!114 &114722733355398268
 MonoBehaviour:
   m_ObjectHideFlags: 1

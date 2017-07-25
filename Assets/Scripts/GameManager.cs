@@ -6,6 +6,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	private void Start() {
 		MasterDataManager.instance.LoadData(() => {
 			print("ロード終わったお");
+			var purchaseView = GameObject.FindObjectOfType<MentorPurchaseView>();
+			purchaseView.SetCells();
 		});
 	}
 
