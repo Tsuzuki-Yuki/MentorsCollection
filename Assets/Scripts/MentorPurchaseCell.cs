@@ -44,6 +44,7 @@ public class MentorPurchaseCell : MonoBehaviour {
 			SoldView ();
 			var chara = user.NewCharacter (characterData);
 			PortrateUIManager.instance.MentorTrainingView.AddCharacter (chara);
+			AvatarManager.instance.SpawnAvatar(chara);
 		});
 
 		user.Money.Subscribe (value => {
