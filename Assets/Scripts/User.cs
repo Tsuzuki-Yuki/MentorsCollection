@@ -26,6 +26,10 @@ public class User {
 		money.Value += cost;
 	}
 
+	public void ConsumptionLevelUpCost(int cost){
+		money.Value -= cost;
+	}
+
 	public Character NewCharacter(MstCharacter data){
 		var uniqueId = (Characters.Count == 0) ? 1 : characters [characters.Count - 1].UniqueID + 1;
 		var chara = new Character (uniqueId, data);

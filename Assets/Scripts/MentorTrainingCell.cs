@@ -23,6 +23,7 @@ public class MentorTrainingCell : MonoBehaviour {
 	[SerializeField] private CanvasGroup levelUpButtonGroup;
 
 	private Character characterData;
+	private User User { get { return GameManager.instance.User; } }
 
 	public void SetValue (Character data){
 		var master = data.Master;
@@ -36,7 +37,12 @@ public class MentorTrainingCell : MonoBehaviour {
 		UpdateValue ();
 
 		levelUpButton.onClick.AddListener(() => {
-			//あとで
+			var cost = CulcLevelUpCost();
+			if(User.Money.Value < cost) return;
+			if(characterData.IsLevelMax) return;
+			characterData.LevelUp();
+			User.ConsumptionLevelUpCost(cost);
+			UpdateValue();
 		});
 
 		descriptionButton.onClick.AddListener(() => {
@@ -46,28 +52,30 @@ public class MentorTrainingCell : MonoBehaviour {
 		vrButton.onClick.AddListener(() => {
 			//あとで
 		});
+
+		if (User.Money.Value < CulcLevelUpCost ()) levelUpButtonGroup.alpha = 0.5f;
+		User.Money.Subscribe (value => {
+			if (characterData.IsLevelMax) return;
+			UpdateValue ();
+		});
 	}
 
 	private int CulcLevelUpCost(){
-		return 100;
+		return MasterDataManager.instance.GetConsumptionMoney(characterData);
 	}
 
 	private void UpdateValue(){
-		var user = GameManager.instance.User;
 		var master = characterData.Master;
 		levelLabel.text = "Lv." + characterData.Level;
 		productivityLabel.text = string.Format ("生産性 : ¥ {0:#,0} /tap", characterData.Power);
 		var cost = CulcLevelUpCost ();
 		costLabel.text = string.Format ("¥{0:#,0}", cost);
 
-		user.Money.Subscribe (value => {
-			if (characterData.IsLevelMax) return;
-			if (value < CulcLevelUpCost ()) {
-				levelUpButtonGroup.alpha = 0.5f;
-			} else {
-				levelUpButtonGroup.alpha = 1.0f;
-			}
-		});
+		if (User.Money.Value < cost) {
+			levelUpButtonGroup.alpha = 0.5f;
+		} else {
+			levelUpButtonGroup.alpha = 1.0f;
+		}
 
 		if (characterData.IsLevelMax) {
 			levelUpButtonGroup.alpha = 0.5f;
