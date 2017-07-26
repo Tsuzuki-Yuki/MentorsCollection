@@ -13,6 +13,18 @@ public class User {
 	public int Money { get { return money; } }
 	public List<Character> Characters { get { return characters ?? (characters = new List<Character> ()); } }
 
+	public int ProductivityPerTap {
+		get {
+			int sum = characters.Sum (c => c.Power);
+			return (sum == 0) ? 1 : sum;
+		}
+	}
+
+
+	public void AddMoney (int cost){
+		money += cost;
+	}
+
 	public Character NewCharacter(MstCharacter data){
 		var uniqueId = (Characters.Count == 0) ? 1 : characters [characters.Count - 1].UniqueID + 1;
 		var chara = new Character (uniqueId, data);

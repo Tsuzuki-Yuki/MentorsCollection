@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 222585703293032682}
   - component: {fileID: 114447855635121570}
   - component: {fileID: 114193535114442008}
+  - component: {fileID: 225421880706247874}
   m_Layer: 0
   m_Name: PurchaseButton
   m_TagString: Untagged
@@ -427,6 +428,7 @@ MonoBehaviour:
   productivityLabel: {fileID: 114722733355398268}
   costLabel: {fileID: 114243496890385742}
   purchaseButton: {fileID: 114193535114442008}
+  buttonGroup: {fileID: 225421880706247874}
 --- !u!114 &114722733355398268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -710,8 +712,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 118.5, y: 15.05}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 67.850006, y: 15.05}
+  m_SizeDelta: {x: 58.7, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224554362455223724
 RectTransform:
@@ -769,3 +771,14 @@ RectTransform:
   m_AnchoredPosition: {x: 133.65, y: 0}
   m_SizeDelta: {x: -277.3, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225421880706247874
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1574425776070934}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

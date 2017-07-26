@@ -9,14 +9,11 @@ public class MentorPurchaseView : MonoBehaviour {
 
 	public void SetCells(){
 		var characters = MasterDataManager.instance.CharacterTable;
-		print (characters);
 		characters.ForEach (c => {
 			var obj = Instantiate (mentorPurchaseCellPrefab) as GameObject;
 			obj.transform.SetParentWithReset (scrollContent);
 			var cell = obj.GetComponent<MentorPurchaseCell> ();
-			print(cell);
 			cell.SetValue (c);
-			print("set終わった");
 		});
 	}
 }
