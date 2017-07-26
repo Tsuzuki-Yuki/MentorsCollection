@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UniRx;
 
 public class GameManager : SingletonMonoBehaviour<GameManager> {
 
@@ -15,6 +16,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 		MasterDataManager.instance.LoadData(() => {
 			PortrateUIManager.instance.SetUp();
+		});
+
+		userData.Money.Subscribe (_ => {
+			Save ();
 		});
 	}
 

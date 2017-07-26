@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UniRx;
 
 [Serializable]
 public class User {
 
-	[SerializeField] private int money;
+	[SerializeField] private IntReactiveProperty money;
 	[SerializeField] private List<Character> characters;
 
-	public int Money { get { return money; } }
+	public ReadOnlyReactiveProperty<int> Money { get { return money.ToReadOnlyReactiveProperty(); } }
 	public List<Character> Characters { get { return characters ?? (characters = new List<Character> ()); } }
 
 	public int ProductivityPerTap {
@@ -22,14 +23,18 @@ public class User {
 
 
 	public void AddMoney (int cost){
-		money += cost;
+		money.Value += cost;
+	}
+
+	public void ConsumptionLevelUpCost(int cost){
+		money.Value -= cost;
 	}
 
 	public Character NewCharacter(MstCharacter data){
 		var uniqueId = (Characters.Count == 0) ? 1 : characters [characters.Count - 1].UniqueID + 1;
 		var chara = new Character (uniqueId, data);
 		characters.Add (chara);
-		money -= data.InitialCost;
+		money.Value -= data.InitialCost;
 		return chara;
 	}
 }

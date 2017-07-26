@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UniRx;
 
 public class PortrateUIManager : SingletonMonoBehaviour<PortrateUIManager> {
 
@@ -45,6 +46,10 @@ public class PortrateUIManager : SingletonMonoBehaviour<PortrateUIManager> {
 		dataClearButton.onClick.AddListener (() => {
 			PlayerPrefs.DeleteAll ();
 			UnityEngine.SceneManagement.SceneManager.LoadScene ("Main");
+		});
+
+		User.Money.Subscribe (_ => {
+			UpdateView ();
 		});
 	}
 

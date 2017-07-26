@@ -14,6 +14,10 @@ public class MasterDataManager : SingletonMonoBehaviour<MasterDataManager> {
 		return characterTable.Find(c => c.ID == id);
 	}
 
+	public int GetConsumptionMoney (Character data) {
+		return (int)(data.Master.InitialCost * Mathf.Pow (1.1f, data.Level - 1));
+	}
+
 	// PublishしてゲットしたURL
 	const string csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSR-Db7l0DPny01_4RPxTKq-En4hf-VoCgKcTDF_88kTrPCqu475T0mj2SvyXayIWqXHXxm2BqndNER/pub?gid=605974578&single=true&output=csv";
 

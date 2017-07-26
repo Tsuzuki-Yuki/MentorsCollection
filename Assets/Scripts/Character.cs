@@ -42,4 +42,8 @@ public class Character {
 	public bool IsLevelMax {
 		get { return (level >= Master.MaxLevel) ? true : false; }
 	}
+
+	public void LevelUp(){
+		level += 1;
+	}
 }
