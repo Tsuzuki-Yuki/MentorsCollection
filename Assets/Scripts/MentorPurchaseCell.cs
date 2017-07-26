@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 public class MentorPurchaseCell : MonoBehaviour {
 
@@ -35,14 +36,23 @@ public class MentorPurchaseCell : MonoBehaviour {
 		var ch = user.Characters.Find (c => c.MasterID == data.ID);
 		isSold = (ch == null) ? false : true;
 		if (isSold) SoldView ();
-		if (!characterData.PurchaseAvailable (user.Money)) buttonGroup.alpha = 1.0f;
+		if (!characterData.PurchaseAvailable (user.Money.Value)) buttonGroup.alpha = 0.5f;
 		purchaseButton.onClick.AddListener (() => {
 			if (isSold) return;
-			if (!characterData.PurchaseAvailable (user.Money)) return;
+			if (!characterData.PurchaseAvailable (user.Money.Value)) return;
 			isSold = true;
 			SoldView ();
 			var chara = user.NewCharacter (characterData);
 			PortrateUIManager.instance.MentorTrainingView.AddCharacter (chara);
+		});
+
+		user.Money.Subscribe (value => {
+			if (isSold) return;
+			if (value < data.InitialCost){
+				buttonGroup.alpha = 0.5f;
+			} else {
+				buttonGroup.alpha = 1.0f;
+			}
 		});
 	}
 

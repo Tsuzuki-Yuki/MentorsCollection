@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 public class MentorTrainingCell : MonoBehaviour {
 
@@ -52,17 +53,21 @@ public class MentorTrainingCell : MonoBehaviour {
 	}
 
 	private void UpdateValue(){
+		var user = GameManager.instance.User;
 		var master = characterData.Master;
 		levelLabel.text = "Lv." + characterData.Level;
 		productivityLabel.text = string.Format ("生産性 : ¥ {0:#,0} /tap", characterData.Power);
 		var cost = CulcLevelUpCost ();
 		costLabel.text = string.Format ("¥{0:#,0}", cost);
 
-		if (true) {
-			levelUpButtonGroup.alpha = 0.5f;
-		} else {
-			levelUpButtonGroup.alpha = 1.0f;
-		}
+		user.Money.Subscribe (value => {
+			if (characterData.IsLevelMax) return;
+			if (value < CulcLevelUpCost ()) {
+				levelUpButtonGroup.alpha = 0.5f;
+			} else {
+				levelUpButtonGroup.alpha = 1.0f;
+			}
+		});
 
 		if (characterData.IsLevelMax) {
 			levelUpButtonGroup.alpha = 0.5f;
