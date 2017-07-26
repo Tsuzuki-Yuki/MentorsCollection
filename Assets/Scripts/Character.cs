@@ -16,7 +16,7 @@ public class Character {
 	}
 
 	public int Power { 
-		get { return 1; }
+		get { int power = Master.LowerEnergy + ((level - 1) * (Master.UpperEnergy - Master.LowerEnergy) / (Master.MaxLevel - 1)); return power;}
 	}
 
 	public Character (int uniqueID, MstCharacter data){
