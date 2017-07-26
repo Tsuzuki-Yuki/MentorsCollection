@@ -16,6 +16,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 		MasterDataManager.instance.LoadData(() => {
 			PortrateUIManager.instance.SetUp();
+			AvatarManager.instance.SetUp();
 		});
 
 		userData.Money.Subscribe (_ => {
