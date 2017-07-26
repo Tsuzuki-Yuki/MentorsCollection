@@ -20,6 +20,7 @@ public class User {
 		}
 	}
 
+
 	public void AddMoney (int cost){
 		money += cost;
 	}
