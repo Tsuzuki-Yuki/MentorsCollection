@@ -2,13 +2,24 @@
 using System.Collections;
 
 public class GameManager : SingletonMonoBehaviour<GameManager> {
-	
+
+	[SerializeField] private User userData = new User();
+	public User User { get { return userData; } }
+	private const string SaveKey = "SaveData";
+
 	private void Start() {
+
+		if (PlayerPrefs.HasKey (SaveKey)) {
+			userData = JsonUtility.FromJson<User> (PlayerPrefs.GetString (SaveKey));
+		}
+
 		MasterDataManager.instance.LoadData(() => {
-			print("ロード終わったお");
-			var purchaseView = GameObject.FindObjectOfType<MentorPurchaseView>();
-			purchaseView.SetCells();
+			PortrateUIManager.instance.SetUp();
 		});
+	}
+
+	public void Save () {
+		PlayerPrefs.SetString (SaveKey, JsonUtility.ToJson (userData));
 	}
 
 	public static void Log (object log) {
