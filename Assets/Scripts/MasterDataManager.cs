@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
 
-public class MasterDataManager 
-	: SingletonMonoBehaviour<MasterDataManager>
-{
+public class MasterDataManager : SingletonMonoBehaviour<MasterDataManager> {
+	
 	[SerializeField]
 	private List<MstCharacter> characterTable = new List<MstCharacter>();
 	public List<MstCharacter> CharacterTable { get { return characterTable; } }
 	// キャラクターをIDで引っ張れるようにしておく
-	public MstCharacter GetCharacterById(int id)
-	{
+	public MstCharacter GetCharacterById(int id) {
 		return characterTable.Find(c => c.ID == id);
 	}
 
@@ -20,14 +18,12 @@ public class MasterDataManager
 	const string csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSR-Db7l0DPny01_4RPxTKq-En4hf-VoCgKcTDF_88kTrPCqu475T0mj2SvyXayIWqXHXxm2BqndNER/pub?gid=605974578&single=true&output=csv";
 
 	// GameManagerから呼んでもらう
-	public void LoadData(UnityAction onFinish)
-	{
+	public void LoadData(UnityAction onFinish) {
 		ConnectionManager.instance.ConnectionAPI(
 			csvUrl, 
 			(string result) => {
 				var csv = CSVReader.SplitCsvGrid(result);
-				for (int i=1; i<csv.GetLength(1)-1; i++) 
-				{
+				for (int i=1; i<csv.GetLength(1)-1; i++) {
 					var data = new MstCharacter();
 					data.SetFromCSV( GetRaw(csv, i) );
 					characterTable.Add(data);
