@@ -17,16 +17,16 @@ public class Character {
 
 	public int Power { 
 		get {
-			int power;
+			int power = 0;
 			switch (Master.GrowthType) {
 			case 1:
-				power = Master.UpperEnergy - ((Master.UpperEnergy - Master.LowerEnergy) * Mathf.Pow((level - Master.MaxLevel)/(1 - Master.MaxLevel), 2));
+				power = (int)(Master.UpperEnergy - ((Master.UpperEnergy - Master.LowerEnergy) * Mathf.Pow((level - Master.MaxLevel)/(1 - Master.MaxLevel), 2)));
 				break;
 			case 2:
-				power = Master.LowerEnergy + ((level - 1) * (Master.UpperEnergy - Master.LowerEnergy) / (Master.MaxLevel - 1));
+				power = (int)(Master.LowerEnergy + ((level - 1) * (Master.UpperEnergy - Master.LowerEnergy) / (Master.MaxLevel - 1)));
 				break;
 			case 3:
-				power = Master.LowerEnergy + ((Master.UpperEnergy - Master.LowerEnergy) * Mathf.Pow((level - 1)/(Master.MaxLevel - 1), 2));
+				power = (int)(Master.LowerEnergy + ((Master.UpperEnergy - Master.LowerEnergy) * Mathf.Pow((level - 1)/(Master.MaxLevel - 1), 2)));
 				break;
 			}
 			return power;

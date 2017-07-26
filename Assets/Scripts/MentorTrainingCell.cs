@@ -54,7 +54,7 @@ public class MentorTrainingCell : MonoBehaviour {
 	private void UpdateValue(){
 		var master = characterData.Master;
 		levelLabel.text = "Lv." + characterData.Level;
-		productivityLabel.text = string.Format ("生産性 : ¥ {0:#,0) /tap", characterData.Power);
+		productivityLabel.text = string.Format ("生産性 : ¥ {0:#,0} /tap", characterData.Power);
 		var cost = CulcLevelUpCost ();
 		costLabel.text = string.Format ("¥{0:#,0}", cost);
 

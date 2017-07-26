@@ -11,6 +11,7 @@ public class PortrateUIManager : SingletonMonoBehaviour<PortrateUIManager> {
 	public MentorPurchaseView MentorPurchaseView { get { return mentorPurchaseView; } }
 	public MentorTrainingView MentorTrainingView { get { return mentorTrainingView; } }
 
+	[SerializeField] private Button workButton, dataClearButton;
 	[SerializeField] private Text
 		moneyLabel,
 		autoWorkLabel,
@@ -21,6 +22,8 @@ public class PortrateUIManager : SingletonMonoBehaviour<PortrateUIManager> {
 		currentView = Const.View.Close,
 		lastView = Const.View.Purchase;
 
+	private static User User { get { return GameManager.instance.User; } }
+
 	public void SetUp() {
 		mentorPurchaseView.SetCells ();
 		mentorTrainingView.SetCells ();
@@ -29,6 +32,26 @@ public class PortrateUIManager : SingletonMonoBehaviour<PortrateUIManager> {
 			openButton.gameObject.SetActive (false);
 			ChangeView (lastView);
 		});
+
+		UpdateView ();
+
+		workButton.onClick.AddListener (() => {
+			var power = User.Characters.Sum (c => c.Power);
+			if (power == 0) power = 1;
+			User.AddMoney (power);
+			UpdateView ();
+		});
+
+		dataClearButton.onClick.AddListener (() => {
+			PlayerPrefs.DeleteAll ();
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("Main");
+		});
+	}
+
+	public void UpdateView(){
+		moneyLabel.text = string.Format ("¥{0:#,0}", User.Money);
+		employeeCountLabel.text = string.Format ("{0:#,0}人", User.Characters.Count);
+		productivityLabel.text = string.Format ("¥{0:#,0}", User.ProductivityPerTap);
 	}
 
 	public void ChangeView (Const.View nextView){
