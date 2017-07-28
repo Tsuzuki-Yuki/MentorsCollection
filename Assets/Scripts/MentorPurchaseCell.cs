@@ -34,6 +34,7 @@ public class MentorPurchaseCell : MonoBehaviour {
 
 		var user = GameManager.instance.User;
 		var ch = user.Characters.Find (c => c.MasterID == data.ID);
+		print (ch);
 		isSold = (ch == null) ? false : true;
 		if (isSold) SoldView ();
 		if (!characterData.PurchaseAvailable (user.Money.Value)) buttonGroup.alpha = 0.5f;
@@ -45,6 +46,7 @@ public class MentorPurchaseCell : MonoBehaviour {
 			var chara = user.NewCharacter (characterData);
 			PortrateUIManager.instance.MentorTrainingView.AddCharacter (chara);
 			AvatarManager.instance.SpawnAvatar(chara);
+			PopupManager.instance.OpenCommon(characterData.Name + "\nが入社しました!");
 		});
 
 		user.Money.Subscribe (value => {
